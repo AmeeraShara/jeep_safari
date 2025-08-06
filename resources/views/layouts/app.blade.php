@@ -44,7 +44,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="jeep.jpeg" alt="Jeep Safari Logo">
+                <img src="{{ asset('jeep.jpeg') }}" alt="Jeep Safari Logo">
                 <strong>Jeep Safari</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-md-3 mb-4 text-center">
                     <h6>Jeep safari Sri Lanka</h6>
-                    <img src="jeep.jpeg" alt="Jeep Image" class="img-fluid rounded-circle mt-2" style="width: 80px;">
+                    <img src="{{ asset('jeep.jpeg') }}" alt="Jeep Image" class="img-fluid rounded-circle mt-2" style="width: 80px;">
                 </div>
             </div>
             <div class="text-center pt-3">
