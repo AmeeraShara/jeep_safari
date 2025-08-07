@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $customers = Customer::latest()->get(); // load all customers
+        $customers = Customer::latest()->get(); 
         return view('admin.dashboard', compact('customers'));
     }
 }
