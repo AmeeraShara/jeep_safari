@@ -36,34 +36,54 @@
             height: 30px;
             margin-right: 10px;
         }
+
+        .navbar {
+           font-family: 'Segoe UI', sans-serif;
+           letter-spacing: 0.6px;
+        }
+
+        .navbar .nav-link {
+            color: #000;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .navbar .nav-link:hover {
+            color: #28a745;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{{ asset('jeep.jpeg') }}" alt="Jeep Safari Logo">
-                <strong>Jeep Safari</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Safari</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Login <i class="fas fa-user ms-1"></i></a></li>
-                </ul>
-            </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm border-bottom py-3 px-4">
+    <div class="container-fluid">
+        <!-- Logo + Title -->
+        <a class="navbar-brand d-flex align-items-center fw-bold fs-5" href="#">
+            <img src="{{ asset('jeep.jpeg') }}" alt="Jeep Safari Logo" style="height: 35px;" class="me-2">
+            Jeep Safari
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Right Navigation -->
+        <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Safari</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Login <i class="fas fa-user ms-1"></i></a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <!-- Main Content -->
-    <main class="py-4">
+    <main class="py-1">
         @yield('content')
     </main>
 

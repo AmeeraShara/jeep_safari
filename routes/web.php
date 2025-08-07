@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedbackController;
 
+//Front page
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
+Route::post('/feedback', [FeedbackController::class, 'store']);
 
 use App\Http\Controllers\Admin\DashboardController;
 
