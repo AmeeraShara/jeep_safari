@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FeedbackController;
 //Front page
 Route::get('/', function () {
     return view('welcome');
