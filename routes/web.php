@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\Admin\DashboardController;
+
 //Front page
 Route::get('/', function () {
     return view('welcome');
