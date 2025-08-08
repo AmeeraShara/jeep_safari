@@ -35,5 +35,12 @@ Route::prefix('admin')->group(function () {
 
 //Home page
 Route::get('/home', function () {
-    return view('home');
+    return view('main.home');
 })->name('home');
+
+//Place description and booking page
+
+//Kumana
+Route::get('/kumana', function () {
+    return view('main.kumana');
+})->name('kumana');
