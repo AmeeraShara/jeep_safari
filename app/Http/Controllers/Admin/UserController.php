@@ -9,16 +9,32 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = Customer::where('role', 'customer')->get();
+        $query = Customer::query();
+
+        // Filter by role if provided, else default to 'customer'
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        } else {
+            $query->where('role', 'customer');
+        }
+
+        // Filter by status if provided
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Paginate with 10 per page, keep query string for filters in pagination links
+        $users = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+
         return view('admin.users.index', compact('users'));
     }
 
     public function show($id)
     {
-        $user = Customer::findOrFail($id);
-        return view('admin.users.show', compact('user'));
+        $customer = Customer::findOrFail($id);
+        return view('admin.users.show', ['customers' => $customer]);
     }
 
     public function create()
@@ -48,6 +64,35 @@ class UserController extends Controller
         Customer::create($validated);
 
         return redirect()->route('admin.users.index')->with('success', 'User added successfully.');
+    }
+
+    public function edit($id)
+    {
+        $customer = Customer::findOrFail($id);
+        return view('admin.users.edit', compact('customer'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::findOrFail($id);
+
+        $validated = $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:customers,email,' . $id,
+            'phone_number' => 'required|string|max:20',
+            'date_of_birth' => 'required|date',
+            'address' => 'required|string',
+            'nationality' => 'required|string',
+            'passport_number' => 'nullable|string|unique:customers,passport_number,' . $id,
+            'emergency_contact_name' => 'required|string',
+            'emergency_contact_number' => 'required|string',
+            'special_preference_notes' => 'nullable|string',
+            'status' => 'required|string|in:active,inactive',
+        ]);
+
+        $customer->update($validated);
+
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)

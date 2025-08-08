@@ -27,8 +27,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
     Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit'); 
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('admin.users.update'); 
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy'); 
 });
+
 
 //Home page
 Route::get('/home', function () {
