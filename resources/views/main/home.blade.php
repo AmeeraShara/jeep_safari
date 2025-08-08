@@ -226,7 +226,7 @@
                             <h5 class="tour-title">YALA</h5>
                             <p class="tour-desc">Yala wild animal watching tour from Sri Lanka</p>
                             <a href="{{ route('yala') }}" class="btn btn-success"> Explore </a>
-                            
+
                             <div class="rating-dots">
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
@@ -244,6 +244,7 @@
                         <div class="card-body">
                             <h5 class="tour-title">UDAWALAWA</h5>
                             <p class="tour-desc">Udawalawe wild animal watching tour from Sri Lanka</p>
+                            <a href="{{ route('udawalawa') }}" class="btn btn-success">Explore</a>
 
                             <div class="rating-dots">
                                 <span class="rating-dot"></span><span class="rating-dot"></span>

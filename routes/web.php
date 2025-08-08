@@ -49,3 +49,8 @@ Route::get('/kumana', function () {
 Route::get('/yala', function () {
     return view('main.yala');
 })->name('yala');
+
+//Udawalawa
+Route::get('/udawalawa', function () {
+    return view('main.udawalawa');
+})->name('udawalawa');
