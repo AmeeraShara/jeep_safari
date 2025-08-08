@@ -32,5 +32,5 @@ Route::prefix('admin')->group(function () {
 
 //Home page
 Route::get('/home', function () {
-    return view('home');
+    return view('main.home');
 })->name('home');
