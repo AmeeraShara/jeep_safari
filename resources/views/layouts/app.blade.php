@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Jeep Safari</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -72,7 +74,7 @@
         <!-- Right Navigation -->
         <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="{{ route('home') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Safari</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Login <i class="fas fa-user ms-1"></i></a></li>
@@ -128,6 +130,12 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+       AOS.init();
+    </script>
 
 </body>
 </html>

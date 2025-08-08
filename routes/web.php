@@ -29,3 +29,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy'); 
 });
+
+//Home page
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
