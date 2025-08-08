@@ -34,3 +34,10 @@ Route::prefix('admin')->group(function () {
 Route::get('/home', function () {
     return view('main.home');
 })->name('home');
+
+//Place description and booking page
+
+//Kumana
+Route::get('/kumana', function () {
+    return view('main.kumana');
+})->name('kumana');
