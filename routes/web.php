@@ -59,3 +59,8 @@ Route::get('/udawalawa', function () {
 Route::get('/weheragala', function (){
     return view('main.weheragala');
 })->name('weheragala');
+
+//Minneriya
+Route::get('/minneriya', function (){
+    return view('main.minneriya');
+})->name('minneriya');
