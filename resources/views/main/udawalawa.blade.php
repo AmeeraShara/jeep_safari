@@ -59,7 +59,7 @@
         <div class="col-lg-8">
             <div class="row g-4">
                 <div class="col-md-6">
-                    <img src="{{ asset('images/udawalawa-elephant.jpg') }}" class="img-fluid rounded shadow" alt="Udawalawe Safari">
+                    <img src="{{ asset('images/udawalawa-peacock.jpg') }}" class="img-fluid rounded shadow" alt="Udawalawe Safari">
                 </div>
                 <div class="col-md-6">
                     <p><strong>Tour Start:</strong> 6.00 AM / 2.30 PM</p>
