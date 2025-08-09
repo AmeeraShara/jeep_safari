@@ -54,3 +54,8 @@ Route::get('/yala', function () {
 Route::get('/udawalawa', function () {
     return view('main.udawalawa');
 })->name('udawalawa');
+
+//Weheragala
+Route::get('/weheragala', function (){
+    return view('main.weheragala');
+})->name('weheragala');
