@@ -64,3 +64,8 @@ Route::get('/weheragala', function (){
 Route::get('/minneriya', function (){
     return view('main.minneriya');
 })->name('minneriya');
+
+//Eco park
+Route::get('/eco-park', function (){
+    return view('main.eco-park');
+})->name('eco-park');
