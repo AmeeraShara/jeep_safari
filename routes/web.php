@@ -74,3 +74,8 @@ Route::get('/eco-park', function (){
 Route::get('/kawdulla', function (){
     return view('main.kawdulla');
 })->name('kawdulla');
+
+//wilpatthuwa
+Route::get('/wilpatthuwa', function (){
+    return view('main.wilpatthuwa');
+})->name('wilpatthuwa');
