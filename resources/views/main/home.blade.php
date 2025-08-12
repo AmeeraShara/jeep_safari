@@ -374,6 +374,7 @@
                         <div class="card-body">
                             <h5 class="tour-title">WASGAMUWA</h5>
                             <p class="tour-desc">Wasgamuwa wild animal watching tour from Sri Lanka</p>
+                            <a href="{{ route('wasgamuwa') }}" class="btn btn-success">Explore</a>
 
                             <div class="rating-dots">
                                 <span class="rating-dot"></span><span class="rating-dot"></span>

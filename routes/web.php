@@ -79,3 +79,8 @@ Route::get('/kawdulla', function (){
 Route::get('/wilpatthuwa', function (){
     return view('main.wilpatthuwa');
 })->name('wilpatthuwa');
+
+//Wasgamuwa
+Route::get('/wasgamuwa', function (){
+    return view('main.wasgamuwa');
+})->name('wasgamuwa');
