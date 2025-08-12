@@ -20,11 +20,18 @@
                     <i class="fas fa-calendar-alt me-2"></i> Bookings
                 </a>
             </li>
+            
+            <!-- Drivers -->
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a 
+                   class="nav-link text-white {{ Request::is('admin/drivers*') ? 'active fw-bold' : '' }}" 
+                   href="{{ route('admin.drivers.index') }}"
+                   {{ Request::is('admin/drivers*') ? 'aria-current=page' : '' }}
+                >
                     <i class="fas fa-users me-2"></i> Drivers
                 </a>
             </li>
+
             <li class="nav-item">
                 <a 
                    class="nav-link text-white {{ Request::is('admin/users*') ? 'active fw-bold' : '' }}" 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DriverController;
 
 //Front page
 Route::get('/', function () {
@@ -84,3 +85,9 @@ Route::get('/wilpatthuwa', function (){
 Route::get('/wasgamuwa', function (){
     return view('main.wasgamuwa');
 })->name('wasgamuwa');
+
+//Admin - Driver
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('drivers', DriverController::class);
+});
