@@ -69,3 +69,8 @@ Route::get('/minneriya', function (){
 Route::get('/eco-park', function (){
     return view('main.eco-park');
 })->name('eco-park');
+
+//Kawdulla
+Route::get('/kawdulla', function (){
+    return view('main.kawdulla');
+})->name('kawdulla');

@@ -338,7 +338,7 @@
                         <div class="card-body">
                             <h5 class="tour-title">KAWDULLA</h5>
                             <p class="tour-desc">Kawdulla wild animal watching tour from Sri Lanka</p>
-
+                            <a href="{{ route('kawdulla') }}" class="btn btn-success">Explore</a>
                             <div class="rating-dots">
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
@@ -356,7 +356,7 @@
                         <div class="card-body">
                             <h5 class="tour-title">WILPATHTHUWA</h5>
                             <p class="tour-desc">Wilpaththuwa wild animal watching tour from Sri Lanka</p>
-
+                            <a href="{{ route('wilpatthuwa') }}" class="btn btn-success">Explore</a>
                             <div class="rating-dots">
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
                                 <span class="rating-dot"></span><span class="rating-dot"></span>
