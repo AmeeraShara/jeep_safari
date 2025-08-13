@@ -76,7 +76,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link fw-semibold" href="{{ route('home') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Safari</a></li>
-                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="{{ route('contact') }}">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Login <i class="fas fa-user ms-1"></i></a></li>
             </ul>
         </div>

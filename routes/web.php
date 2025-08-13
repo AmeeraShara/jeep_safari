@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\ContactController;
 
 //Front page
 Route::get('/', function () {
-    return view('welcome');
+    return view('main.home');
 });
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
@@ -34,13 +34,13 @@ Route::prefix('admin')->group(function () {
 });
 
 
+
 //Home page
 Route::get('/home', function () {
     return view('main.home');
 })->name('home');
 
 //Place description and booking page
-
 //Kumana
 Route::get('/kumana', function () {
     return view('main.kumana');
@@ -87,7 +87,10 @@ Route::get('/wasgamuwa', function (){
 })->name('wasgamuwa');
 
 //Admin - Driver
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('drivers', DriverController::class);
 });
+
+//Contact page
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
