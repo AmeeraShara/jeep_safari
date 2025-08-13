@@ -30,6 +30,7 @@
                 <li class="mb-2"><i class="bi bi-telephone-fill text-success"></i> +94 123 456 789</li>
                 <li class="mb-2"><i class="bi bi-envelope-fill text-success"></i> info@jeepsafari.com</li>
             </ul>
+            <br>
             <p><strong>Business Hours:</strong><br>
                 Monday - Friday: 8:00 AM - 6:00 PM<br>
                 Saturday: 9:00 AM - 5:00 PM<br>
