@@ -9,11 +9,36 @@ use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
-    public function index()
-    {
-        $drivers = Driver::latest()->get();
-        return view('admin.drivers.index', compact('drivers'));
+public function index(Request $request)
+{
+    $query = Driver::query();
+
+    // Search by name or email
+    if ($request->filled('search')) {
+        $query->where(function($q) use ($request) {
+            $q->where('full_name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%');
+        });
     }
+
+    // Filter by park
+    if ($request->filled('primary_park')) {
+        $query->where('primary_park', $request->primary_park);
+    }
+
+    // Filter by status
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    $drivers = $query->latest()->get();
+
+    // For dropdown options (unique parks list)
+    $parks = Driver::select('primary_park')->distinct()->pluck('primary_park');
+
+    return view('admin.drivers.index', compact('drivers', 'parks'));
+}
+
 
     public function create()
     {
