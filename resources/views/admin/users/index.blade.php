@@ -34,7 +34,7 @@
                     <option value="">All Roles</option>
                     <option value="customer" {{ request('role') == 'customer' ? 'selected' : '' }}>Customer</option>
                     <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                    <option value="manager" {{ request('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+                    <option value="manager" {{ request('role') == 'driver' ? 'selected' : '' }}>Driver</option>
                 </select>
 
                 <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" style="width: 120px;">
@@ -102,88 +102,76 @@
 
 <!-- Add User Modal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 600px;">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header py-2">
                 <h5 class="modal-title">Add New User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="{{ route('admin.users.store') }}" method="POST">
                 @csrf
-                <div class="modal-body">
-                    <div class="row">
-                        <!-- Full Name -->
-                        <div class="col-md-6 mb-3">
-                            <label>Full Name *</label>
-                            <input type="text" name="customer_name" class="form-control" required>
+                <div class="modal-body py-2">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" name="customer_name" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Email -->
-                        <div class="col-md-6 mb-3">
-                            <label>Email Address *</label>
-                            <input type="email" name="email" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" name="email" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Phone -->
-                        <div class="col-md-6 mb-3">
-                            <label>Phone Number *</label>
-                            <input type="text" name="phone_number" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="text" name="phone_number" class="form-control form-control-sm" required>
                         </div>
-                        <!-- DOB -->
-                        <div class="col-md-6 mb-3">
-                            <label>Date of Birth *</label>
-                            <input type="date" name="date_of_birth" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth *</label>
+                            <input type="date" name="date_of_birth" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Address -->
-                        <div class="col-md-12 mb-3">
-                            <label>Address *</label>
-                            <input type="text" name="address" class="form-control" required>
+                        <div class="col-md-12">
+                            <label class="form-label">Address *</label>
+                            <input type="text" name="address" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Nationality -->
-                        <div class="col-md-6 mb-3">
-                            <label>Nationality *</label>
-                            <input type="text" name="nationality" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality *</label>
+                            <input type="text" name="nationality" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Passport -->
-                        <div class="col-md-6 mb-3">
-                            <label>Passport Number</label>
-                            <input type="text" name="passport_number" class="form-control">
+                        <div class="col-md-6">
+                            <label class="form-label">Passport Number</label>
+                            <input type="text" name="passport_number" class="form-control form-control-sm">
                         </div>
-                        <!-- Emergency Name -->
-                        <div class="col-md-6 mb-3">
-                            <label>Emergency Contact Name *</label>
-                            <input type="text" name="emergency_contact_name" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Emergency Contact Name *</label>
+                            <input type="text" name="emergency_contact_name" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Emergency Phone -->
-                        <div class="col-md-6 mb-3">
-                            <label>Emergency Contact Number *</label>
-                            <input type="text" name="emergency_contact_number" class="form-control" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Emergency Contact Number *</label>
+                            <input type="text" name="emergency_contact_number" class="form-control form-control-sm" required>
                         </div>
-                        <!-- Role -->
-                        <div class="col-md-6 mb-3">
-                            <label>Role *</label>
-                            <select name="role" class="form-select" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Role *</label>
+                            <select name="role" class="form-select form-select-sm" required>
                                 <option value="Customer" selected>Customer</option>
                                 <option value="Driver">Driver</option>
                                 <option value="Admin">Admin</option>
                             </select>
                         </div>
-                        <!-- Status -->
-                        <div class="col-md-6 mb-3">
-                            <label>Status *</label>
-                            <select name="status" class="form-select" required>
+                        <div class="col-md-6">
+                            <label class="form-label">Status *</label>
+                            <select name="status" class="form-select form-select-sm" required>
                                 <option value="active" selected>Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
                         </div>
-                        <!-- Notes -->
-                        <div class="col-md-12 mb-3">
-                            <label>Special Preference Notes</label>
-                            <textarea name="special_preference_notes" class="form-control" placeholder="Dietary restrictions, accessibility needs, special requests..."></textarea>
+                        <div class="col-md-12">
+                            <label class="form-label">Special Preference Notes</label>
+                            <textarea name="special_preference_notes" class="form-control form-control-sm" placeholder="Dietary restrictions, accessibility needs, special requests..."></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Add User</button>
+                <div class="modal-footer py-2">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success btn-sm">Add User</button>
                 </div>
             </form>
         </div>

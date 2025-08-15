@@ -9,27 +9,30 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = Customer::query();
+public function index(Request $request)
+{
+    $query = Customer::query();
 
-        // Filter by role if provided, else default to 'customer'
-        if ($request->filled('role')) {
-            $query->where('role', $request->role);
-        } else {
-            $query->where('role', 'customer');
-        }
-
-        // Filter by status if provided
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        // Paginate with 10 per page, keep query string for filters in pagination links
-        $users = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
-
-        return view('admin.users.index', compact('users'));
+    // Filter by role if provided, else default to 'customer'
+    if ($request->filled('role')) {
+        $query->where('role', $request->role);
+    } else {
+        $query->where('role', 'customer');
     }
+
+    // Filter by status if provided
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    // Paginate with 10 per page, keep query string for filters in pagination links
+    $users = $query->orderBy('created_at', 'asc') // <-- change to ascending
+                   ->paginate(10)
+                   ->withQueryString();
+
+    return view('admin.users.index', compact('users'));
+}
+
 
     public function show($id)
     {
