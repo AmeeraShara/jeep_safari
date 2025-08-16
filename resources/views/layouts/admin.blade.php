@@ -5,6 +5,8 @@
             <h5 class="mb-0">Admin Panel</h5>
             <small>Jeep Safari</small>
         </div>
+
+        <!-- Dashboard -->
         <ul class="nav flex-column mt-3">
             <li class="nav-item">
                 <a
@@ -14,11 +16,17 @@
                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="fas fa-calendar-alt me-2"></i> Bookings
-                </a>
-            </li>
+
+            <!-- Bookings -->
+<li class="nav-item">
+    <a
+        class="nav-link text-white {{ Request::is('admin/bookings*') ? 'active fw-bold' : '' }}"
+        href="{{ route('admin.bookings.index') }}"
+        {{ Request::is('admin/bookings*') ? 'aria-current="page"' : '' }}>
+        <i class="fas fa-calendar-alt me-2"></i> Bookings
+    </a>
+</li>
+
 
             <!-- Drivers -->
             <li class="nav-item">
@@ -29,7 +37,8 @@
                     <i class="fas fa-users me-2"></i> Drivers
                 </a>
             </li>
-
+            
+            <!-- Users -->
             <li class="nav-item">
                 <a
                     class="nav-link text-white {{ Request::is('admin/users*') ? 'active fw-bold' : '' }}"
@@ -38,11 +47,17 @@
                     <i class="fas fa-user me-2"></i> Users
                 </a>
             </li>
+
+            <!-- Settings -->
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white {{ Request::is('admin/settings') ? 'active fw-bold' : '' }}"
+                    href="{{ route('admin.settings') }}"
+                    {{ Request::is('admin/settings') ? 'aria-current=page' : '' }}>
                     <i class="fas fa-cog me-2"></i> Settings
                 </a>
             </li>
+            
+            <!-- Logout -->
             <li class="nav-item mt-auto">
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf

@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\BookingController;
 
 //Front page
 Route::get('/', function () {
@@ -23,7 +25,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-//User
+//Admin - User
 Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
@@ -39,6 +41,19 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 Route::get('/', function () {
     return view('main.home'); 
 })->name('main.home');
+
+//Admin - settings
+Route::get('/admin/settings', [SettingsController::class, 'index'])->name('admin.settings');
+Route::post('/admin/settings/update', [SettingsController::class, 'update'])->name('admin.settings.update');
+
+//Admin- Bookings
+Route::get('/admin/bookings', [BookingController::class, 'index'])->name('admin.bookings.index');
+Route::get('/admin/bookings/create', [BookingController::class, 'create'])->name('admin.bookings.create');
+Route::post('/admin/bookings/store', [BookingController::class, 'store'])->name('admin.bookings.store');
+Route::get('/admin/bookings/{id}/edit', [BookingController::class, 'edit'])->name('admin.bookings.edit');
+Route::post('/admin/bookings/{id}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
+Route::delete('/admin/bookings/{id}/delete', [BookingController::class, 'destroy'])->name('admin.bookings.destroy');
+
 
 
 //Home page
