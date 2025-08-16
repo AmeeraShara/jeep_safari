@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AuthController;
 
 //Front page
 Route::get('/', function () {
@@ -33,6 +34,11 @@ Route::prefix('admin')->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy'); 
 });
 
+//Admin - Logout
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+Route::get('/', function () {
+    return view('main.home'); 
+})->name('main.home');
 
 
 //Home page

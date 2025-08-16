@@ -7,11 +7,10 @@
         </div>
         <ul class="nav flex-column mt-3">
             <li class="nav-item">
-                <a 
-                   class="nav-link text-white {{ Request::is('admin/home') ? 'active fw-bold' : '' }}" 
-                   href="{{ url('/admin/home') }}"
-                   {{ Request::is('admin/home') ? 'aria-current=page' : '' }}
-                >
+                <a
+                    class="nav-link text-white {{ Request::is('admin/home') ? 'active fw-bold' : '' }}"
+                    href="{{ url('/admin/home') }}"
+                    {{ Request::is('admin/home') ? 'aria-current=page' : '' }}>
                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                 </a>
             </li>
@@ -20,24 +19,22 @@
                     <i class="fas fa-calendar-alt me-2"></i> Bookings
                 </a>
             </li>
-            
+
             <!-- Drivers -->
             <li class="nav-item">
-                <a 
-                   class="nav-link text-white {{ Request::is('admin/drivers*') ? 'active fw-bold' : '' }}" 
-                   href="{{ route('admin.drivers.index') }}"
-                   {{ Request::is('admin/drivers*') ? 'aria-current=page' : '' }}
-                >
+                <a
+                    class="nav-link text-white {{ Request::is('admin/drivers*') ? 'active fw-bold' : '' }}"
+                    href="{{ route('admin.drivers.index') }}"
+                    {{ Request::is('admin/drivers*') ? 'aria-current=page' : '' }}>
                     <i class="fas fa-users me-2"></i> Drivers
                 </a>
             </li>
 
             <li class="nav-item">
-                <a 
-                   class="nav-link text-white {{ Request::is('admin/users*') ? 'active fw-bold' : '' }}" 
-                   href="{{ route('admin.users.index') }}"
-                   {{ Request::is('admin/users*') ? 'aria-current=page' : '' }}
-                >
+                <a
+                    class="nav-link text-white {{ Request::is('admin/users*') ? 'active fw-bold' : '' }}"
+                    href="{{ route('admin.users.index') }}"
+                    {{ Request::is('admin/users*') ? 'aria-current=page' : '' }}>
                     <i class="fas fa-user me-2"></i> Users
                 </a>
             </li>
@@ -47,10 +44,14 @@
                 </a>
             </li>
             <li class="nav-item mt-auto">
-                <a class="nav-link text-white" href="#">
-                    <i class="fas fa-sign-out-alt me-2"></i> Logout
-                </a>
+                <form action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link text-white border-0 bg-transparent w-100 text-start">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </button>
+                </form>
             </li>
+
         </ul>
     </div>
 </div>
