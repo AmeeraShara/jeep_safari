@@ -9,36 +9,35 @@ use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
-public function index(Request $request)
-{
-    $query = Driver::query();
+    public function index(Request $request)
+    {
+        $query = Driver::query();
 
-    // Search by name or email
-    if ($request->filled('search')) {
-        $query->where(function($q) use ($request) {
-            $q->where('full_name', 'like', '%' . $request->search . '%')
-              ->orWhere('email', 'like', '%' . $request->search . '%');
-        });
+        // Search by name or email
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('full_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter by park
+        if ($request->filled('primary_park')) {
+            $query->where('primary_park', $request->primary_park);
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $drivers = $query->latest()->get();
+
+        // For dropdown options (unique parks list)
+        $parks = Driver::select('primary_park')->distinct()->pluck('primary_park');
+
+        return view('admin.drivers.index', compact('drivers', 'parks'));
     }
-
-    // Filter by park
-    if ($request->filled('primary_park')) {
-        $query->where('primary_park', $request->primary_park);
-    }
-
-    // Filter by status
-    if ($request->filled('status')) {
-        $query->where('status', $request->status);
-    }
-
-    $drivers = $query->latest()->get();
-
-    // For dropdown options (unique parks list)
-    $parks = Driver::select('primary_park')->distinct()->pluck('primary_park');
-
-    return view('admin.drivers.index', compact('drivers', 'parks'));
-}
-
 
     public function create()
     {
@@ -77,5 +76,59 @@ public function index(Request $request)
 
         return redirect()->route('admin.drivers.index')->with('success', 'Driver added successfully.');
     }
-}
 
+    // ===== EDIT METHOD =====
+    public function edit($id)
+    {
+        $driver = Driver::findOrFail($id);
+        return view('admin.drivers.edit', compact('driver'));
+    }
+
+    // ===== UPDATE METHOD =====
+    public function update(Request $request, $id)
+    {
+        $driver = Driver::findOrFail($id);
+
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:drivers,email,' . $driver->id,
+            'phone_number' => 'required|string',
+            'years_of_experience' => 'required|integer|min:0',
+            'joined_date' => 'required|date',
+            'primary_park' => 'required|string',
+            'license_number' => 'required|string',
+            'vehicle' => 'required|string',
+            'language' => 'required|string',
+            'status' => 'required',
+            'password' => 'nullable|min:6|confirmed' // optional
+        ]);
+
+        $driver->update([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'years_of_experience' => $request->years_of_experience,
+            'joined_date' => $request->joined_date,
+            'primary_park' => $request->primary_park,
+            'license_number' => $request->license_number,
+            'vehicle' => $request->vehicle,
+            'language' => $request->language,
+            'status' => $request->status
+        ]);
+
+        if ($request->filled('password')) {
+            $driver->password = Hash::make($request->password);
+            $driver->save();
+        }
+
+        return redirect()->route('admin.drivers.index')->with('success', 'Driver updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $driver = Driver::findOrFail($id);
+        $driver->delete();
+
+        return redirect()->route('admin.drivers.index')->with('success', 'Driver deleted successfully.');
+    }
+}
