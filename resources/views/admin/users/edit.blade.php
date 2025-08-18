@@ -97,7 +97,7 @@
 
                             <div class="col-12 d-flex justify-content-end">
                                 <a href="{{ route('admin.users.index') }}" class="btn btn-secondary me-2">Back</a>
-                                <button type="submit" class="btn btn-primary">Update User</button>
+                                <button type="submit" class="btn btn-success">Update User</button>
                             </div>
                         </div>
                     </form>

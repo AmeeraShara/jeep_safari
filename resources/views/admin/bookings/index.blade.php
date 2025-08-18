@@ -43,10 +43,19 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('bookings.edit',$booking->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('bookings.destroy',$booking->id) }}" method="POST" style="display:inline;">
-                                @csrf @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Cancel</button>
+                           
+                            {{-- Edit Booking --}}
+                            <a href="{{ route('admin.bookings.edit', $booking->id) }}" class="btn btn-sm me-1" title="Edit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            {{-- Delete Booking --}}
+                            <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to cancel this booking?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm" title="Cancel">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
