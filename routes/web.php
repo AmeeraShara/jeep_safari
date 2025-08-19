@@ -16,9 +16,8 @@ Route::get('/', function () {
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
 //Admin 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
+Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.home');
+
 Route::prefix('admin')->group(function () {
     Route::get('/home', function () {
         return view('admin.home');
