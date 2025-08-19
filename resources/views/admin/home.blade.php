@@ -112,7 +112,7 @@ $recentBookings = Booking::latest()->take(5)->get();
                     <p class="text-muted m-3">No recent bookings to display.</p>
                     @endif
                 </div>
-            </div>lk
+            </div>
 
         </div>
     </div>
