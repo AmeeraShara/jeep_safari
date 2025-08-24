@@ -20,9 +20,8 @@ Route::get('/', function () {
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
 //Admin 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
+Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.home');
+
 Route::prefix('admin')->group(function () {
     Route::get('/home', function () {
         return view('admin.home');
@@ -58,6 +57,15 @@ Route::get('/admin/bookings/{id}/edit', [BookingController::class, 'edit'])->nam
 Route::post('/admin/bookings/{id}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
 Route::delete('/admin/bookings/{id}/delete', [BookingController::class, 'destroy'])->name('admin.bookings.destroy');
 
+//Admin - Driver
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('drivers', [DriverController::class, 'index'])->name('drivers.index');      
+    Route::get('drivers/create', [DriverController::class, 'create'])->name('drivers.create'); 
+    Route::post('drivers', [DriverController::class, 'store'])->name('drivers.store');       
+    Route::get('drivers/{driver}/edit', [DriverController::class, 'edit'])->name('drivers.edit');  
+    Route::put('drivers/{driver}', [DriverController::class, 'update'])->name('drivers.update'); 
+    Route::delete('drivers/{driver}', [DriverController::class, 'destroy'])->name('drivers.destroy');
+});
 
 
 //Home page
@@ -111,10 +119,6 @@ Route::get('/wasgamuwa', function (){
     return view('main.wasgamuwa');
 })->name('wasgamuwa');
 
-//Admin - Driver
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('drivers', DriverController::class);
-});
 
 //Contact page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
