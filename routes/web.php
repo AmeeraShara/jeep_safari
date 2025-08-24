@@ -8,6 +8,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\User\NotificationController;
+use App\Http\Controllers\User\PaymentMethodController;
+use App\Http\Controllers\User\ProfileController;
+
 
 //Front page
 Route::get('/', function () {
@@ -115,3 +119,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
 //Contact page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+//user pages
+Route::prefix('user')->name('user.')->group(function () {
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+
+    Route::get('/profile/{customerId}', [ProfileController::class, 'index'])->name('user.profile');
+
+     // Show profile page
+    Route::get('/profile/{customerId}', [ProfileController::class, 'show'])->name('profile');
+
+    // Update profile
+    Route::post('/profile/{customerId}', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/bookings', function () {
+        return view('user.bookings');
+    })->name('bookings');
+
+    // Payment Methods
+    Route::get('/payment/{customer}', [PaymentMethodController::class, 'index'])->name('payment');
+    Route::post('/payment/{customer}', [PaymentMethodController::class, 'store'])->name('payment.store');
+    Route::delete('/payment/{customer}/destroy/{payment}', [PaymentMethodController::class, 'destroy'])->name('payment.destroy');
+    Route::post('/payment/{customer}/set-default/{payment}', [PaymentMethodController::class, 'setDefault'])
+     ->name('payment.setDefault');
+
+     Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+});
