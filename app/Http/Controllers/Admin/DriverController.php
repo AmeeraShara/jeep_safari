@@ -131,4 +131,13 @@ class DriverController extends Controller
 
         return redirect()->route('admin.drivers.index')->with('success', 'Driver deleted successfully.');
     }
+    public function deactivate($id)
+{
+    $driver = Driver::findOrFail($id);
+    $driver->status = 'Inactive'; // change status instead of deleting
+    $driver->save();
+
+    return redirect()->route('admin.drivers.index')->with('success', 'Driver deactivated successfully.');
+}
+
 }

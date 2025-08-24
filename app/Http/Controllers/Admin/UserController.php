@@ -50,13 +50,13 @@ public function index(Request $request)
         $validated = $request->validate([
             'customer_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email',
-            'phone_number' => 'required|string|max:20',
-            'date_of_birth' => 'required|date',
-            'address' => 'required|string',
-            'nationality' => 'required|string',
+            'phone_number' => 'nullable|string|max:20',
+            'date_of_birth' => 'nullable|date',
+            'address' => 'nullable|string',
+            'nationality' => 'nullable|string',
             'passport_number' => 'nullable|string|unique:customers,passport_number',
-            'emergency_contact_name' => 'required|string',
-            'emergency_contact_number' => 'required|string',
+            'emergency_contact_name' => 'nullable|string',
+            'emergency_contact_number' => 'nullable|string',
             'special_preference_notes' => 'nullable|string',
         ]);
 

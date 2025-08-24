@@ -8,9 +8,42 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BookingController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\PaymentMethodController;
 use App\Http\Controllers\User\ProfileController;
+=======
+<<<<<<< HEAD
+use App\Http\Controllers\Auth\RegisterController;
+
+// Login & Registration
+Route::get('/login', [RegisterController::class, 'showLoginForm'])->name('login');
+Route::post('/login/{role}', [RegisterController::class, 'login']);
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register/{role}', [RegisterController::class, 'register']);
+Route::match(['get','post'], '/admin/home', [DashboardController::class, 'index'])->name('admin.home');
+
+// Dashboards
+Route::get('/admin/home', function () {
+    return view('admin.home'); 
+})->name('admin.home');
+
+Route::get('/driver/dashboard', function () {
+    return view('driver.dashboard'); // create this blade
+})->name('driver.dashboard');
+
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard'); // create this blade
+})->name('user.dashboard');
+
+// Logout
+Route::post('/logout', [RegisterController::class, 'logout'])->name('logout');
+=======
+use App\Http\Controllers\User\NotificationController;
+use App\Http\Controllers\User\PaymentMethodController;
+use App\Http\Controllers\User\ProfileController;
+>>>>>>> 2c9746c0318c3f04a0f59dfd0e5d20b6aeb3e05e
+>>>>>>> Stashed changes
 
 
 //Front page
@@ -20,7 +53,7 @@ Route::get('/', function () {
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
 //Admin 
-Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.home');
+//Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.home');
 
 Route::prefix('admin')->group(function () {
     Route::get('/home', function () {
@@ -54,7 +87,7 @@ Route::get('/admin/bookings', [BookingController::class, 'index'])->name('admin.
 Route::get('/admin/bookings/create', [BookingController::class, 'create'])->name('admin.bookings.create');
 Route::post('/admin/bookings/store', [BookingController::class, 'store'])->name('admin.bookings.store');
 Route::get('/admin/bookings/{id}/edit', [BookingController::class, 'edit'])->name('admin.bookings.edit');
-Route::post('/admin/bookings/{id}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
+Route::put('/admin/bookings/{id}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
 Route::delete('/admin/bookings/{id}/delete', [BookingController::class, 'destroy'])->name('admin.bookings.destroy');
 
 //Admin - Driver
@@ -66,7 +99,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::put('drivers/{driver}', [DriverController::class, 'update'])->name('drivers.update'); 
     Route::delete('drivers/{driver}', [DriverController::class, 'destroy'])->name('drivers.destroy');
 });
-
+Route::patch('admin/drivers/{driver}/deactivate', [DriverController::class, 'deactivate'])->name('admin.drivers.deactivate');
 
 //Home page
 Route::get('/home', function () {
