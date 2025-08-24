@@ -8,15 +8,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BookingController;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\PaymentMethodController;
 use App\Http\Controllers\User\ProfileController;
-=======
-=======
->>>>>>> Stashed changes
-<<<<<<< HEAD
 use App\Http\Controllers\Auth\RegisterController;
 
 // Login & Registration
@@ -41,15 +35,7 @@ Route::get('/user/dashboard', function () {
 
 // Logout
 Route::post('/logout', [RegisterController::class, 'logout'])->name('logout');
-=======
-use App\Http\Controllers\User\NotificationController;
-use App\Http\Controllers\User\PaymentMethodController;
-use App\Http\Controllers\User\ProfileController;
->>>>>>> 2c9746c0318c3f04a0f59dfd0e5d20b6aeb3e05e
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 
 //Front page
