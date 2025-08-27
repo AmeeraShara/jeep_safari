@@ -12,6 +12,10 @@ use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\PaymentMethodController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Review\ReviewController;
+use App\Http\Controllers\Review\PlaceController;
+
+
 
 // Login & Registration
 Route::get('/login', [RegisterController::class, 'showLoginForm'])->name('login');
@@ -176,3 +180,15 @@ Route::prefix('user')->name('user.')->group(function () {
 
      Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
 });
+
+
+//Review 
+Route::prefix('review')->group(function () {
+    Route::get('/', [ReviewController::class,'index'])->name('review.index');
+    Route::get('/create', [ReviewController::class,'create'])->name('review.create');
+    Route::post('/store', [ReviewController::class,'store'])->name('review.store');
+    Route::get('/search-place', [ReviewController::class,'searchPlace'])->name('review.searchPlace');
+});
+//Places
+Route::get('/places/create', [PlaceController::class, 'create'])->name('places.create');
+Route::post('/places', [PlaceController::class, 'store'])->name('places.store');
