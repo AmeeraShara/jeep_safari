@@ -184,7 +184,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
 //Review 
 Route::prefix('review')->group(function () {
-    Route::get('/', [ReviewController::class,'index'])->name('review.index');
+    Route::get('/index', [ReviewController::class,'index'])->name('review.index');
     Route::get('/create', [ReviewController::class,'create'])->name('review.create');
     Route::post('/store', [ReviewController::class,'store'])->name('review.store');
     Route::get('/search-place', [ReviewController::class,'searchPlace'])->name('review.searchPlace');

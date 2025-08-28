@@ -16,13 +16,27 @@ class Review extends Model
 
     protected $casts = [
         'agreement' => 'boolean',
-        'photos' => 'array', // handle JSON as array
         'visit_date' => 'date',
     ];
+
+    // Accessor to convert comma-separated string back to array
+    public function getPhotosAttribute($value)
+    {
+        return $value ? explode(',', $value) : [];
+    }
+
+    // Mutator to convert array to comma-separated string (optional but good practice)
+    public function setPhotosAttribute($value)
+    {
+        if (is_array($value)) {
+            $this->attributes['photos'] = implode(',', $value);
+        } else {
+            $this->attributes['photos'] = $value;
+        }
+    }
 
     public function place()
     {
         return $this->belongsTo(Place::class);
     }
 }
-
