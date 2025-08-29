@@ -85,11 +85,11 @@ class ReviewController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Review submitted successfully!',
-                    'redirect' => route('review.index')
+                    'redirect' => route('home')
                 ]);
             }
             
-            return redirect()->route('review.index')->with('success', 'Review submitted!');
+            return redirect()->route('home')->with('success', 'Review submitted!');
 
         }  catch (\Exception $e) {
         // All other errors
