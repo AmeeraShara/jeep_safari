@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write a Review - TripAdvisor Style</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- Add CSRF token meta tag -->
+    <title>Write a Review - JeepSafari Style</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,7 +16,7 @@
             --ta-light: #F8F9FA;
             --ta-border: #e6e6e6;
         }
-        
+ 
         body {
             background-color: #f4f4f4;
             color: var(--ta-dark);
@@ -699,7 +700,14 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     }
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw err;
+                        });
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.success) {
                         showSuccess(data.message || 'Review submitted successfully!');
@@ -714,6 +722,13 @@
                         // Reset character count
                         charCount.textContent = '0';
                         charCount.style.color = '#6c757d';
+                        
+                        // Redirect after 2 seconds if needed
+                        setTimeout(() => {
+                            if (data.redirect) {
+                                window.location.href = data.redirect;
+                            }
+                        }, 2000);
                     } else {
                         // Show validation errors
                         if (data.errors) {
@@ -729,7 +744,15 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    showError('An error occurred while submitting your review. Please try again.');
+                    if (error.errors) {
+                        let errorHtml = '';
+                        for (const [field, errors] of Object.entries(error.errors)) {
+                            errorHtml += errors.join('<br>') + '<br>';
+                        }
+                        showError(errorHtml);
+                    } else {
+                        showError(error.message || 'An error occurred while submitting your review. Please try again.');
+                    }
                 });
             });
             
@@ -738,12 +761,16 @@
                 successText.innerHTML = message;
                 successMessage.classList.remove('d-none');
                 errorMessage.classList.add('d-none');
+                // Scroll to top to show message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
             function showError(message) {
                 errorText.innerHTML = message;
                 errorMessage.classList.remove('d-none');
                 successMessage.classList.add('d-none');
+                // Scroll to top to show message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     </script>

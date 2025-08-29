@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ReviewController extends Controller
 {
-
-        public function index()
+    public function index()
     {
         // Use paginate() instead of get()
         $reviews = Review::with('place')->latest()->paginate(10); // 10 items per page
@@ -75,14 +74,34 @@ class ReviewController extends Controller
                 'title'      => $request->title,
                 'comment'    => $request->comment,
                 'photos'     => $photosString, // Store as comma-separated string
-                'agreement'  => true,
+                'agreement'  => (bool) $request->agreement, // Fix: Use the actual value
             ]);
 
             Log::info('Review created successfully');
+            
+            // Return JSON response for AJAX requests
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Review submitted successfully!',
+                    'redirect' => route('review.index')
+                ]);
+            }
+            
             return redirect()->route('review.index')->with('success', 'Review submitted!');
 
         } catch (\Exception $e) {
             Log::error('Review creation failed: ' . $e->getMessage());
+            
+            // Return JSON response for AJAX requests
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to submit review: ' . $e->getMessage(),
+                    'errors' => $e->errors() ?? []
+                ], 422);
+            }
+            
             return back()->withInput()->with('error', 'Failed to submit review: ' . $e->getMessage());
         }
     }
