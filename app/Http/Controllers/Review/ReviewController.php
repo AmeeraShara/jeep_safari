@@ -7,6 +7,7 @@ use App\Models\Review;
 use App\Models\Place;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ReviewController extends Controller
 {
@@ -90,19 +91,20 @@ class ReviewController extends Controller
             
             return redirect()->route('review.index')->with('success', 'Review submitted!');
 
-        } catch (\Exception $e) {
-            Log::error('Review creation failed: ' . $e->getMessage());
-            
-            // Return JSON response for AJAX requests
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Failed to submit review: ' . $e->getMessage(),
-                    'errors' => $e->errors() ?? []
-                ], 422);
-            }
+        }  catch (\Exception $e) {
+        // All other errors
+        Log::error('Review creation failed: ' . $e->getMessage());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to submit review: ' . $e->getMessage()
+            ], 500);
+        }
+
+        return back()->withInput()->with('error', 'Failed to submit review: ' . $e->getMessage());
+    }
             
             return back()->withInput()->with('error', 'Failed to submit review: ' . $e->getMessage());
         }
     }
-}

@@ -217,7 +217,10 @@
 <body>
     <div class="container py-4" style="max-width: 1200px;">
         <div class="header d-flex justify-content-between align-items-center">
-            <div class="logo"><i class="fas fa-plane"></i> Trip<span>Advisor</span></div>
+<div class="logo d-flex align-items-center">
+    <img src="{{ asset('jeep.jpeg') }}" alt="Jeep Safari Logo" style="height:28px; margin-right:6px;">
+    <span class="fw-bold">Jeep <span style="color:#28a745;">Safari</span></span>
+</div>
             <h2><i class="fas fa-pencil-alt me-2"></i>Write a Review</h2>
         </div>
         
